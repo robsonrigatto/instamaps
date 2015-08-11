@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <title>Instamaps</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <link rel="stylesheet" href="css/app.css">
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBgSo6X2JzC30P49Ci6J2IB4pfhRmlt8V0"></script>
+  <script src="js/jquery.min.js"></script>
+  <script src="js/bootstrap.min.js"></script>
+  <script src="js/bootstrap-waitingfor.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/app.js"></script>
+</head>
+<body ng-app="app">
+<div class="container">
+	<div class="panel panel-default" ng-controller="InstamapsController">
+	    <form ng-submit="searchPosts()">
+		   <div class="panel-heading">
+			  <h3 class="panel-title">
+				 Instagram + Google Maps
+			  </h3>
+		   </div>
+		   <div class="panel-body">
+				<div class="row">
+					<div class="col-md-6 form-group">
+						<label for="tags">Tags:</label>
+						<input name="tags" type="text" ng-model="model.tags" class="form-control" />
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="radius">Raio (km):</label>
+						<input name="radius" type="number" ng-model="model.radius" class="form-control" required/>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-12 form-group">
+						<label>Clique em um ponto do mapa:</label>
+						<div id="map-canvas"></div>
+					</div>
+				</div>
+				<div class="row latLng" ng-show="model.latLng != null">
+					<div class="col-md-6 form-group">
+						<label for="lat">Latitude:</label>
+						<input name="lat" type="text" ng-model="model.latLng.lat" class="form-control" required readonly/>
+					</div>
+					<div class="col-md-6 form-group">
+						<label for="lng">Longitude:</label>
+						<input name="lng" type="text" ng-model="model.latLng.lng" class="form-control" required readonly/>
+					</div>
+				</div>
+				<div ng-show="model.error.enabled">
+					<div class="alert alert-danger">
+						<a class="close" aria-label="close" ng-click="clearError()">&times;</a>
+						<strong>{{model.error.prefix}}</strong> {{model.error.message}}
+					</div>
+				</div>
+		   </div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-instagram">
+					<span class="glyphicon glyphicon-search"></span> Procurar
+				</button>
+			</div>
+		</form>
+	</div>
+	<div id="resultModal" class="modal fade" role="dialog" ng-controller="ResultController">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+					<h4 class="modal-title">Publicações Encontradas</h4>
+				</div>
+				<div class="modal-body">
+					<div class="post list-group" ng-repeat="p in getResults()">
+						<div class="list-group-item">
+							<header class="postHeader">
+								<img class="profilePicture" ng-src="{{p.user.profile_picture}}">
+								<div class="ownerAndLocation">
+									<div class="username">{{p.user.username}}</div>
+									<div class="location">{{p.location.name}}</div>
+								</div>
+							</header>
+							<img class="picture" ng-src="{{p.images.low_resolution.url}}">
+							<div class="likesCount"><b>{{p.likes.count}} likes</b></div>
+							<div class="text">{{p.caption.text}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,56 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+.panel-heading {
+	background-color: rgba(4, 40, 71, 0.8) !important;
+}
+.btn-instagram {
+	background-color: rgba(4, 40, 71, 0.8);
+	border: 1px solid transparent;
+}
+.panel-heading, .btn-instagram, btn-instagram:focus {
+	color: #FFFFFF !important;
+}
+.btn-instagram:hover {
+	background-color: #517fa4 !important;
+}
+#map-canvas {
+	width: 100%;
+	min-height: 270px;
+}
+
+.modal-body {
+	max-height: 500px;
+    overflow: scroll;
+	background-color: #FAFAFA;
+}
+
+.postHeader {
+	min-height: 50px;
+}
+
+.username {
+	font-weight: bold;
+}
+
+.location {
+	font-style: italic;
+}
+
+.picture {
+	width: 100%;
+}
+
+.profilePicture {
+	flex-basis: 30px;
+    height: 30px;
+    margin: -1px 10px -1px -5px;
+    width: 30px;
+    background-color: #fbfbfb;
+    border-radius: 50%;
+    border: 1px solid #cccfd0;
+    box-sizing: border-box;
+    float: left;
+}
